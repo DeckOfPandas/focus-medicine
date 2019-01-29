@@ -3,28 +3,34 @@
 ## Helen's setup notes
 
 ### Docs used
-
+  * https://wiki.js.org/get-started.html (not that useful tbh)
   * https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
-  * https://wiki.js.org/get-started.html
-  * https://websiteforstudents.com/install-wiki-js-on-ubuntu-16-04-17-10-18-04/  
+  * https://www.vultr.com/docs/how-to-install-wiki-js-on-ubuntu-18-04
+
+### Step by step
 
 Make a box:  
-1. Create new DigitalOcean droplet on Ubuntu 16.04
+* Create new DigitalOcean droplet on Ubuntu 16.04
   * Min 1GB memory, >=2GB strongly recommended
-2. Set up server as per: 
-  * Users  
-  * RSA keys  
+* Set up server as per https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
+  * New user with sudo
+  * Timezone
+  * RSA access  
   * Simple firewall  
 
-Install things:  
-1. Install Node.js  
-  * curl from nodesource    
-  * install via apt  
-2. Install MongoDB  
-  * Via apt  
-3. Download and install Wiki.js  
-  * Create `/var/www/wikijs`  
-  * Download via curl  
-4. Configure Wiki.js using wizard  
-  * `sudo node wiki configure 8192`  
-  * Port 8192 for now  
+Install things:
+* Quick overview: https://www.vultr.com/docs/how-to-install-wiki-js-on-ubuntu-18-04
+* Install Git (v2.7.4 here)
+* Install Node.js (v10.x here)
+* Install MongoDB (v3.2 here)
+* Put a standard web server in front -- nginx as per https://www.vultr.com/docs/how-to-install-wiki-js-on-ubuntu-18-04
+* Configure nginx
+* Install Acme.sh client and get a LE certificate
+* Download and install Wiki.js inside /var/www/wikijs
+* Run server and configure using wizard
+  * `node wiki configure`  
+  * Default port is 3000, need to change in nginx proxy settings if altered
+* Install PM2 and set up as startup service
+
+### Configuration wizard
+* System check likes our settings so far: [image]
